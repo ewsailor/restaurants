@@ -1,15 +1,33 @@
+{{!-- views/layouts/main.hbs --}}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Example App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/stylesheets/bootstrap.min.css" rel="stylesheet"> {{!-- 放入 bootstrap 的 CSS --}}
+  <link rel="stylesheet" href="/stylesheets/index-page-style.css"> {{!-- 放入 index-page 的 CSS --}}
+  <link rel="stylesheet" href="/stylesheets/show-page-style.css"> {{!-- 放入 show-page 的 CSS --}}
+  <script src="https://kit.fontawesome.com/eff27abcf1.js" crossorigin="anonymous"></script> {{!-- 放入 Font Awesome --}}
+  <title>Restaurant List</title>
 </head>
 
 <body>
-
-  {{{body}}}
-
+  {{!--  Navbar --}}
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png" width="30"
+          height="30" class="d-inline-block align-top" alt="我的餐廳清單">
+        我的餐廳清單
+      </a>
+    </div>
+  </nav>
+  <div class="banner"></div>
+  
+  {{{ body }}} <!-- body 的意思是，所有 template，都使用這個 layout -->
+  
+  <script src="/javascripts/bootstrap.bundle.min.js"></script> <!-- 放入 bootstrap 的 JS -->
 </body>
 
 </html>
