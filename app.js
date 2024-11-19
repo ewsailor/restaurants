@@ -1,7 +1,18 @@
 // 在 app.js 建立路由
 const express = require('express')
+const { engine } = require('express-handlebars') // 設定在 Express 中使用的樣版引擎
 const app = express()
 const port = 3000
+
+// 告訴 Express：麻煩幫我把樣板引擎交給 express-handlebars：
+// app.engine：透過這個方法來定義要使用的樣板引擎，其中參數 .hbs 是這個樣板引擎的名稱。
+app.engine('.hbs', engine({extname: '.hbs'}))  
+// app.set：透過這個方法告訴 Express 說要設定的 view engine 是 hbs (handlebars)。
+app.set('view engine', '.hbs') 
+app.set('views', './views')
+
+// 在 app.js 檔案使用 app.use，並提供靜態檔案的路徑，就可以將 JSON 檔案載入
+app.use(express.static('public'))
 
 // 設定路由
 app.get('/', (req, res) => {
@@ -9,7 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/restaurants', (req, res) => {
-  res.send('listing restaurants')
+  res.render('index')
 })
 
 app.get('/restaurant/:id', (req, res) => {
