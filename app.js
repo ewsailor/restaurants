@@ -22,7 +22,14 @@ app.get('/', (req, res) => {
 })
 
 app.get('/restaurants', (req, res) => {
-  res.render('index', { restaurants } )
+  const keyword = req.query.search?.trim() || '' // searching：因為在 index.hbs 中，input 的 name="search"，去除多餘空白，確保 keyword 至少是一個空字串
+  // console.log('keyword', keyword)
+  const matchedRestaurants = keyword ? restaurants.filter(rt =>
+        (rt.name && rt.name.toLowerCase().includes(keyword.toLowerCase())) ||
+        (rt.category && rt.category.toLowerCase().includes(keyword.toLowerCase()))
+      )
+    : restaurants
+  res.render('index', { restaurants: matchedRestaurants, keyword} ) 
 })
 
 app.get('/restaurant/:id', (req, res) => {

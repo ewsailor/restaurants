@@ -4,16 +4,16 @@
   <div class="container search-bar">
     <div class="search-bar-outer">
       <div class="search-bar-inner">
-        <form action="/search"> 
+        <form action="/restaurants"> {{!-- 表單提交時會送往的位址：將 <form action="/search">改成 <form action="/restaurants"> --}}
           <h4 class="mb-2">尋找餐廳：</h4>
           <div class="input-group">
             <input 
               type="text" 
-              name="keyword" 
+              name="search" {{!-- searching：將 keyword 改成 search --}}
               class="form-control"
-              placeholder="輸入餐廳、分類" 
-              value=""
-              aria-label="Restaurant Name..." 
+              placeholder="輸入餐廳、分類"
+              aria-label="Restaurant Name..."
+              value="{{keyword}}" {{!-- searching：新增 value="{{keyword}}"--}}
               aria-describedby="search-button">
             <div class="input-group-append">
               <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
