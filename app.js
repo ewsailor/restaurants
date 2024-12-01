@@ -2,7 +2,14 @@
 const express = require('express')
 const { engine } = require('express-handlebars') // 設定在 Express 中使用的樣版引擎
 const app = express()
+
+const db = require('./models') // 要在 app.js 取用 sequelize 相關的套件，需要引用models資料夾。
+const restaurant = db.restaurant
+// db：在 models 資料夾裡的 index.js 的邏輯中，是透過 module exports 的方式讓外部使用，而 module.exports = db
+// restaurant：使用 models 資料夾裡的 restaurant.js 所定義的「modelName: 'restaurant',」
+
 const port = 3000
+
 const restaurants = require('./public/jsons/restaurants.json').results // listing：把 restaurants.json 的 results 傳進去 
 
 // 告訴 Express：麻煩幫我把樣板引擎交給 express-handlebars：
@@ -23,6 +30,10 @@ app.get('/', (req, res) => {
 
 // 取得 GET restaurants 清單頁：http://localhost:3000/restaurants
 app.get('/restaurants', (req, res) => {
+  return restaurant.findAll() // 刪除原本的 res.send('get all  restaurants')，改成利用 restaurant.findAll 取得全部的 restaurant 項目
+		.then((restaurants) => res.send({ restaurants })) // findAll 是非同步函數，因此要用 then callback 獲取執行結果，並將執行結果傳回畫面
+		.catch((err) => res.status(422).json(err))
+
   const keyword = req.query.search?.trim() || '' // searching：因為在 index.hbs 中，input 的 name="search"，去除多餘空白，確保 keyword 至少是一個空字串
   // console.log('keyword', keyword)
   const matchedRestaurants = keyword ? restaurants.filter(rt =>
