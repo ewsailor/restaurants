@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
   res.redirect('/restaurants') // 將根路徑 / redirect 到 /restaurants ，原因是專案規格中，網站的首頁會直接導向餐廳清單。
 })
 
+// 取得 GET restaurants 清單頁：http://localhost:3000/restaurants
 app.get('/restaurants', (req, res) => {
   const keyword = req.query.search?.trim() || '' // searching：因為在 index.hbs 中，input 的 name="search"，去除多餘空白，確保 keyword 至少是一個空字串
   // console.log('keyword', keyword)
@@ -30,6 +31,36 @@ app.get('/restaurants', (req, res) => {
       )
     : restaurants
   res.render('index', { restaurants: matchedRestaurants, keyword} ) 
+})
+
+// create-取得 GET restaurants 新增頁：http://localhost:3000/restaurants/new
+app.get('/restaurants/new', (req, res) => {
+	res.send('create restaurant')
+})
+
+// create-新增 POST restaurant：http://localhost:3000/restaurants/new
+app.post('/restaurants', (req, res) => { // 建立、新增 restaurant
+	res.send('add restaurant')
+})
+
+// Read-取得 GET restaurants 項目頁-看 restaurant 的 detail：http://localhost:3000/restaurants/{id}
+app.get('/restaurants/:id', (req, res) => {
+	res.send(`get restaurant: ${req.params.id}`)
+})
+
+// Update-取得 GET restaurants 編輯頁
+app.get('/restaurants/:id/edit', (req, res) => {
+	res.send(`get restaurant edit: ${req.params.id}`)
+})
+
+// Update-編輯 PUT restaurant
+app.put('/restaurants/:id', (req, res) => { // 更新、編輯 restaurant，用 id 指定編輯的對象
+	res.send(`restaurant id: ${req.params.id} has been modified`) // 指定前面路由參數設定的 id
+})
+
+// Delete-刪除 restaurant
+app.delete('/restaurants/:id', (req, res) => { // 刪除 restaurant
+	res.send(`restaurant id: ${req.params.id} has been deleted`)
 })
 
 app.get('/restaurant/:id', (req, res) => {
