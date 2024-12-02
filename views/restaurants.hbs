@@ -3,6 +3,15 @@
 <a href="./restaurants/new">Create</a> {{!-- 放上 create 按鈕 --}}
 
 <ul>
+  {{#each restaurants}}
+  <li>
+    {{this.name}}
+    <a href="./restaurants/{{ this.id }}">detail</a> {{!-- 在 restaurants 清單頁旁，加入 detail 連結按鈕：路徑指定為「./restaurants/{{ this.id }}」，而在點擊後能依據 restaurants 的 ID 導向 restaurants 的路由 --}}
+  </li>
+  {{/each}}
+</ul>
+
+<ul>
   {{#each restaurants}} {{!-- 用迴圈顯示每個 restaurants 的名稱 --}}
   <li>
     <pre>{{this.name}}</pre>

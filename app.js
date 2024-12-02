@@ -89,7 +89,14 @@ app.post('/restaurants', (req, res) => {
 
 // Read-取得 GET restaurants 項目頁-看 restaurant 的 detail：http://localhost:3000/restaurants/{id}
 app.get('/restaurants/:id', (req, res) => {
-	res.send(`get restaurant: ${req.params.id}`)
+  const id = req.params.id // // 刪除原本的「res.send(`get restaurant: ${req.params.id}`)」，改成「const id = req.params.id」，以「」 
+
+	return restaurant.findByPk(id, {
+		attributes: ['id', 'name'], // 加入 Attribute 取得特定欄位
+		raw: true
+	})
+		.then((restaurant) => res.render('restaurant', { restaurant })) // 取得結果後，透過 View Template，渲染 restaurant 項目頁
+		.catch((err) => console.log(err))
 })
 
 // Update-取得 GET restaurants 編輯頁
