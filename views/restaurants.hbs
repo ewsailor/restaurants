@@ -1,0 +1,15 @@
+<ul>
+  {{#each restaurants}} {{!-- 用迴圈顯示每個 restaurants 的名稱 --}}
+  <li>
+    <pre>{{this.name}}</pre>
+    <pre>{{this.name_en}}</pre>
+    <pre>{{this.category}}</pre>
+    <pre>{{this.image}}</pre>
+    <pre>{{this.location}}</pre>
+    <pre>{{this.phone}}</pre>
+    <pre>{{this.google_map}}</pre>
+    <pre>{{this.rating}}</pre>
+    <pre>{{this.description}}</pre>
+  <li>
+  {{/each}}
+</ul>

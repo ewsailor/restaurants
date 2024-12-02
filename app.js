@@ -32,8 +32,10 @@ app.get('/', (req, res) => {
 
 // 取得 GET restaurants 清單頁：http://localhost:3000/restaurants
 app.get('/restaurants', (req, res) => {
-  return restaurant.findAll() // 刪除原本的 res.send('get all  restaurants')，改成利用 restaurant.findAll 取得全部的 restaurant 項目
-		.then((restaurants) => res.send({ restaurants })) // findAll 是非同步函數，因此要用 then callback 獲取執行結果，並將執行結果傳回畫面
+  return restaurant.findAll({ // 刪除原本的 res.send('get all restaurants')，改成利用 restaurant.findAll 取得全部的 restaurant 項目
+    raw: true
+  })
+		.then((restaurants) => res.render('restaurants', { restaurants })) // 刪除原本的「res.send({ restaurants }))」，改成「res.render('restaurants', { restaurants }))」，以「」
 		.catch((err) => res.status(422).json(err))
 
   const keyword = req.query.search?.trim() || '' // searching：因為在 index.hbs 中，input 的 name="search"，去除多餘空白，確保 keyword 至少是一個空字串
