@@ -24,8 +24,10 @@ app.set('views', './views')
 app.use(express.static('public'))
 
 // 設定路由
+// http://localhost:3000/
 app.get('/', (req, res) => {
-  res.redirect('/restaurants') // 將根路徑 / redirect 到 /restaurants ，原因是專案規格中，網站的首頁會直接導向餐廳清單。
+	res.render('index')
+  // res.redirect('/restaurants') // 將根路徑 / redirect 到 /restaurants ，原因是專案規格中，網站的首頁會直接導向餐廳清單。
 })
 
 // 取得 GET restaurants 清單頁：http://localhost:3000/restaurants
