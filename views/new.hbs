@@ -1,0 +1,48 @@
+{{!-- views/new.hbs --}}
+<h1>Create a New Restaurant</h1>
+
+<form action="/restaurants" method="POST"> {{!-- action 屬性定義表單資料發送的位置，這裡定義的是「用 POST 方法，把資料送給 /restaurants 位置」，這代表等下我們需要再新增一條 POST /restaurants 路由來接住這筆表單資料。 --}}
+  <label for="name">Name:</label>
+  <input 
+    type="text" 
+    placeholder="Input Restaurant Name" {{!-- 輸入框中的提示內容 --}}
+    id="name" 
+    name="RestaurantName" required {{!-- 這個 name 屬性是 HTTP 傳輸時的資料名稱。這些資料會被放在 HTTP 的 request body 裡，進到 Express.js 後打包成 req.body 物件，就能在後續流程中使用：這裡設定 name="RestaurantName"，後面我們可以用 req.body.RestaurantName 拿出這個輸入框的 value --}}
+  > 
+  <br>
+
+  <label for="name_en">Name (English):</label>
+  <input type="text" id="name_en" name="RestaurantName_en">
+  <br>
+
+  <label for="category">Category:</label>
+  <input type="text" id="category" name="RestaurantCategory">
+  <br>
+
+  <label for="image">Image URL:</label>
+  <input type="url" id="image" name="RestaurantImage">
+  <br>
+
+  <label for="location">Location:</label>
+  <input type="text" id="location" name="RestaurantLocation">
+  <br>
+
+  <label for="phone">Phone:</label>
+  <input type="tel" id="phone" name="RestaurantPhone">
+  <br>
+
+  <label for="google_map">Google Map URL:</label>
+  <input type="url" id="google_map" name="RestaurantGoogle_map">
+  <br>
+
+  <label for="rating">Rating:</label>
+  <input type="number" step="0.1" min="0" max="5" id="rating" name="RestaurantRating">
+  <br>
+
+  <label for="description">Description:</label>
+  <textarea id="description" name="RestaurantDescription"></textarea>
+  <br>
+
+  <button type="submit">Create</button> {{!-- 新增 type="submit" --}}
+</form>
+
