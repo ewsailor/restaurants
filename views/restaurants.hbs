@@ -7,6 +7,7 @@
   <li>
     {{this.name}}
     <a href="./restaurants/{{ this.id }}">detail</a> {{!-- 在 restaurants 清單頁旁，加入 detail 連結按鈕：路徑指定為「./restaurants/{{ this.id }}」，而在點擊後能依據 restaurants 的 ID 導向 restaurants 的路由 --}}
+    <a href="./restaurants/{{ this.id }}/edit">edit</a> {{!-- 在 restaurants 清單頁旁，加入 edit 連結按鈕：路徑指定為「./restaurants/{{ this.id }}/edit」，而在點擊後能依據 restaurants 的 ID 導向 restaurants 的路由 --}}
   </li>
   {{/each}}
 </ul>

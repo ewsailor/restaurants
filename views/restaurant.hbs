@@ -1,4 +1,5 @@
 {{!-- views/restaurant.hbs --}}
 
 <p>{{ restaurant.name }}</p> {{!-- 在項目頁顯示 restaurant 的名稱 --}}
+<a href="/restaurants/{{restaurant.id}}/edit">edit</a> {{!-- 加入編輯按鈕 --}}
 <a href="/restaurants">back</a> {{!-- 在項目頁提供一個 Back 按鈕，返回 restaurants 清單頁 --}}

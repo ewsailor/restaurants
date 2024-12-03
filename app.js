@@ -3,6 +3,7 @@ const express = require('express')
 const { engine } = require('express-handlebars') // 設定在 Express 中使用的樣版引擎
 const app = express()
 
+const methodOverride = require('method-override') // 使用 methodOverride
 const db = require('./models') // 要在 app.js 取用 sequelize 相關的套件，需要引用models資料夾。
 const restaurant = db.restaurant
 // db：在 models 資料夾裡的 index.js 的邏輯中，是透過 module exports 的方式讓外部使用，而 module.exports = db
@@ -20,6 +21,7 @@ app.set('view engine', '.hbs')
 app.set('views', './views')
 app.use(express.urlencoded({ extended: true })) // Create：app.use 的使用方式在後面的章節會搭配 middleware 有詳細說明，這邊可以先簡單理解 app.use 是用來對「所有的 request」進行前置處理即可
 // 由於 Express.js 如果要獲取傳送過來的表單資料需要另外設定，否則會回傳 undefined，因此，這裡需要使用 express.urlencoded，從請求網址中獲取表單資料，並加入 extended: true 的設定
+app.use(methodOverride('_method')) // 使用 methodOverride，用 '_method' 作為識別
 
 // 新增 for MVC 的 Model
 // 在 app.js 檔案使用 app.use，並提供靜態檔案的路徑，就可以將 JSON 檔案載入
@@ -101,12 +103,26 @@ app.get('/restaurants/:id', (req, res) => {
 
 // Update-取得 GET restaurants 編輯頁
 app.get('/restaurants/:id/edit', (req, res) => {
-	res.send(`get restaurant edit: ${req.params.id}`)
+	const id = req.params.id // 在渲染表單之前，我們要先取得編輯物件的 restaurant 內容
+	// 刪除原本的「res.send(`get restaurant edit: ${req.params.id}`)」，改成「return res.render('edit')」，以「取得 edit.hbs 中的樣板」
+	// 再改成	return restaurant.findByPk
+	return restaurant.findByPk(id, {
+		attributes: ['id', 'name'], // 加入 Attribute 取得特定欄位
+		raw: true
+	})
+		.then((restaurant) => res.render('edit', { restaurant })) // 取得結果後，透過 View Template，渲染 restaurant 編輯頁
+		.catch((err) => console.log(err))	
 })
 
 // Update-編輯 PUT restaurant
 app.put('/restaurants/:id', (req, res) => { // 更新、編輯 restaurant，用 id 指定編輯的對象
-	res.send(`restaurant id: ${req.params.id} has been modified`) // 指定前面路由參數設定的 id
+	// 刪除：res.send(`restaurant id: ${req.params.id} has been modified`) // 指定前面路由參數設定的 id
+	const body = req.body
+	// console.log(body) 
+	const id = req.params.id
+	 
+	return restaurant.update({ name: body.name }, { where: { id }})
+		.then(() => res.redirect(`/restaurants/${id}`))
 })
 
 // Delete-刪除 restaurant

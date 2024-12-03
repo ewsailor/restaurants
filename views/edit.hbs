@@ -1,0 +1,17 @@
+{{!-- views/edit.hbs --}}
+
+<form 
+  action="/restaurants/{{restaurant.id}}?_method=PUT" 
+  method="POST"
+>
+{{!-- 依據先前的路由設計，這裡我們將要發送的路徑設置為 restaurant id --}}
+{{!-- 並用 methodOverride中的 '_method' 作為識別，設定值為 put，並把 method="PUT" 改成 method="POST" --}}
+  <input 
+    type="text" 
+    placeholder="please input name" 
+    name="name" 
+    value="{{restaurant.name}}" {{!-- 在 Name input 中，使用 Value 屬性，將 todo Name 放入 input 的輸入值 --}}
+  >
+  <button type="submit">Save</button>
+  <a href="/restaurants">back</a> {{!-- 回到 restaurants 清單頁 --}}
+</form>
