@@ -124,11 +124,16 @@ app.put('/restaurants/:id', (req, res) => { // 更新、編輯 restaurant，用 
 	return restaurant.update({ name: body.name }, { where: { id }})
 		.then(() => res.redirect(`/restaurants/${id}`))
 })
-
+ 
 // Delete-刪除 restaurant
 app.delete('/restaurants/:id', (req, res) => { // 刪除 restaurant
-	res.send(`restaurant id: ${req.params.id} has been deleted`)
+	const id = req.params.id
+
+	return restaurant.destroy({ where: { id }})
+		.then(() => res.redirect('/restaurants'))
+	// 刪除：res.send(`restaurant id: ${req.params.id} has been deleted`)
 })
+ 
 
 app.get('/restaurant/:id', (req, res) => {
   const id = req.params.id // 使用 params 做動態路由：取得使用者在網址列中輸入的「請求物件」，取得使用者於網址上 :id 位置輸入的內容，再把這個取得的內容動態回應到使用者所看的網站畫面中，最終讓使用者可以在瀏覽器畫面上看到自己於網址列所輸入的內容
