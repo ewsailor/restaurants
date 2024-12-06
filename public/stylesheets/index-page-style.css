@@ -1,5 +1,5 @@
 main {
-  outline: 3px solid tomato; 
+  /* outline: 3px solid tomato;  */
   max-width: 1080px; /* 限制最大寬度 */
   margin: 0 auto; /* 容器水平置中 */
   padding: 40px 20px; 
@@ -8,6 +8,34 @@ main {
   height: 70px; /* 高度 (可根據需求調整) */
   border-radius: 8px;
 } 
+
+.new-container {
+  /* outline: 3px solid blue; */
+  margin-top: 400px;   
+}
+
+.new {
+  /* outline: 3px solid purple;  */
+  color: rgb(0, 0, 0); 
+  max-width: 680px; /* 限制最大寬度 */
+  margin: 0 auto; /* 容器水平置中 */
+}
+
+/* 為表單中的所有輸入框設定寬度 */
+form input,
+form textarea {
+  width: 400px; /* 固定寬度，確保一致 */
+  max-width: 100%; /* 保證不會超過父容器的寬度 */
+  max-width: 600px; /* 最大寬度，防止超出太大的限制 */
+  padding: 8px; /* 增加內邊距，讓使用者輸入更舒適 */
+  box-sizing: border-box; /* 包含內邊距和邊框到元素總寬度 */
+  margin-bottom: 5px; /* 增加間距讓輸入框之間更整齊 */
+}
+
+/* 單獨設置 textarea 高度 */
+form textarea {
+  height: 120px; /* 設定高度 */
+}
 
 .row-container {
   /* outline: 3px solid rgb(225, 255, 0); */
@@ -152,5 +180,13 @@ header {
   .btn {
     flex-grow: 1; /* 小螢幕按鈕佔據均等空間 */
     min-width: 80px; /* 設定更小的最小寬度 */
+  }
+}
+
+@media (max-width: 768px) { /* RWD */
+
+  form input,
+  form textarea {
+    width: 100%;
   }
 }
