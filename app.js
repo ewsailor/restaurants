@@ -116,7 +116,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 	// 刪除原本的「res.send(`get restaurant edit: ${req.params.id}`)」，改成「return res.render('edit')」，以「取得 edit.hbs 中的樣板」
 	// 再改成	return restaurant.findByPk
 	return restaurant.findByPk(id, {
-		attributes: ['id', 'name'], // 加入 Attribute 取得特定欄位
+		attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'], // 加入 Attribute 取得特定欄位
 		raw: true
 	})
 		.then((restaurant) => res.render('edit', { restaurant })) // 取得結果後，透過 View Template，渲染 restaurant 編輯頁
@@ -130,7 +130,17 @@ app.put('/restaurants/:id', (req, res) => { // 更新、編輯 restaurant，用 
 	// console.log(body) 
 	const id = req.params.id
 	 
-	return restaurant.update({ name: body.name }, { where: { id }})
+	return restaurant.update({ // 原本是 return restaurant.update({ name: body.RestaurantName })
+    name: body.RestaurantName, 
+    name_en: body.RestaurantName_en,
+    category: body.RestaurantCategory,
+    image: body.RestaurantImage,
+    location: body.RestaurantLocation,
+    phone: body.RestaurantPhone,
+    google_map: body.RestaurantGoogle_map,
+    rating: body.RestaurantRating,
+    description: body.RestaurantDescription,
+  }, { where: { id }})
 		.then(() => res.redirect(`/restaurants/${id}`))
 })
  

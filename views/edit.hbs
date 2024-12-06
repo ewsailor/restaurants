@@ -1,17 +1,75 @@
 {{!-- views/edit.hbs --}}
-
-<form 
-  action="/restaurants/{{restaurant.id}}?_method=PUT" 
-  method="POST"
->
-{{!-- 依據先前的路由設計，這裡我們將要發送的路徑設置為 restaurant id --}}
-{{!-- 並用 methodOverride中的 '_method' 作為識別，設定值為 put，並把 method="PUT" 改成 method="POST" --}}
-  <input 
-    type="text" 
-    placeholder="please input name" 
-    name="name" 
-    value="{{restaurant.name}}" {{!-- 在 Name input 中，使用 Value 屬性，將 todo Name 放入 input 的輸入值 --}}
-  >
-  <button type="submit">Save</button>
-  <a href="/restaurants">back</a> {{!-- 回到 restaurants 清單頁 --}}
-</form>
+<div class="new-container">
+  <div class="edit">
+    <h2>因為趕著在12/31前完課，故暫不優化視覺界面，僅確認功能可行性</h2>
+    <form action="/restaurants/{{restaurant.id}}?_method=PUT" method="POST">
+      {{!-- 依據先前的路由設計，這裡我們將要發送的路徑設置為 restaurant id --}}
+      {{!-- 並用 methodOverride中的 '_method' 作為識別，設定值為 put，並把 method="PUT" 改成 method="POST" --}}
+      <label for="name">Name:</label>
+      <input 
+        type="text" 
+        id="name"   
+        name="RestaurantName"  
+        value="{{restaurant.name}}" {{!-- 使用 Value 屬性，一點開 edit 頁面，就可以看到 restaurant name 原本的值 --}}>
+      <br>  
+      <label for="name_en">Name (English):</label>
+      <input 
+        type="text"    
+        id="name_en" 
+        name="RestaurantName_en"  
+        value="{{restaurant.name_en}}">
+      <br>  
+      <label for="category">Category:</label>
+      <input 
+        type="text"  
+        id="category"
+        name="RestaurantCategory"
+        value="{{restaurant.category}}">
+      <br>
+      <label for="image">Image URL:</label>
+      <input 
+        type="url"  
+        id="image" 
+        name="RestaurantImage"
+        value="{{restaurant.image}}">
+      <br>  
+      <label for="location">Location:</label>
+      <input 
+        type="text"   
+        id="location" 
+        name="RestaurantLocation"
+        value="{{restaurant.location}}">
+      <br>
+      <label for="phone">Phone:</label>
+      <input 
+        type="tel"  
+        id="phone" 
+        name="RestaurantPhone"
+        value="{{restaurant.phone}}">
+      <br>  
+      <label for="google_map">Google Map URL:</label>
+      <input 
+        type="url"  
+        id="google_map" 
+        name="RestaurantGoogle_map"
+        value="{{restaurant.google_map}}">
+      <br>
+      <label for="rating">Rating:</label>
+      <input 
+        type="number" 
+        step="0.1" min="0" max="5"  
+        id="rating" 
+        name="RestaurantRating"
+        value="{{restaurant.rating}}">
+      <br>
+      <label for="description">Description:</label> 
+      <textarea 
+        id="description"  
+        name="RestaurantDescription"
+        placeholder="輸入餐廳描述...">{{restaurant.description}}</textarea> {{!-- 刪除 <textarea> 標籤之間的空格或換行：避免 placeholder 不顯示：因如果 <textarea> 內部有任何內容（即使是空白或換行符號），placeholder 就不會生效 --}}
+      <br>  
+      <button type="submit">Save</button>
+      <a href="/restaurants">back</a> {{!-- 回到 restaurants 清單頁 --}}
+    </form>
+  </div>
+</div>

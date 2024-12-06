@@ -43,6 +43,13 @@ form textarea {
   margin: 0 auto; /* 容器水平置中 */
 } 
 
+.edit {
+  /* outline: 3px solid rgb(128, 0, 0); */
+  color: rgb(0, 0, 0); 
+  max-width: 680px; /* 限制最大寬度 */
+  margin: 0 auto; /* 容器水平置中 */
+}
+
 header {
   overflow: hidden;
 }
