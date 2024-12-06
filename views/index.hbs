@@ -5,8 +5,11 @@
     <div class="search-bar-outer">
       <div class="search-bar-inner">
         <form action="/restaurants"> {{!-- 表單提交時會送往的位址：將 <form action="/search">改成 <form action="/restaurants"> --}}
-          <h4 class="mb-2">尋找餐廳：</h4>
+          {{!-- <h4 class="mb-2">尋找餐廳：</h4> --}}
           <div class="input-group">
+            <span class="test">
+              <i class="fas fa-search"></i> 
+            </span>
             <input 
               type="text" 
               name="search" {{!-- searching：將 keyword 改成 search --}}
@@ -16,7 +19,12 @@
               value="{{keyword}}" {{!-- searching：新增 value="{{keyword}}"--}}
               aria-describedby="search-button">
             <div class="input-group-append">
-              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+              <button 
+                class="btn btn-major" 
+                type="submit" 
+                id="search-button">
+              Search
+              </button>
             </div>
           </div>
         </form>
@@ -26,29 +34,48 @@
 
   {{!-- restaurant list --}}
   <div class="container mt-5">
-    <div class="row">
+    <div class="row22">
       <div class="col-md-10 col-12 mx-auto">
-        <div class="row row-cols-sm-3"> {{!-- {{#each}} 放在此之下，避免強制每張卡片在新的一行上，導致每個 row 只含一張卡片 --}}
-          {{#each restaurants as |restaurant|}} <!-- 已有 ID，故不用 restaurantsIndex -->
-          <a href="/restaurant/{{restaurant.id}}" class="text-secondary">
-            <!-- 期待使用者點擊每一張卡片，都能導向 /restaurant/:id 的路由，故用 /restaurant/:id 當成路徑，並套用 each 語法 id 的格式，即 {{restaurant.id}} -->
-            <div class="card mb-3">
-              <img class="card-img-top" src="{{restaurant.image}}" alt="{{restaurant.name}}">
-              <div class="card-body p-3">
-                <h6 class="card-title mb-1">{{restaurant.name}}</h6>
-
-                <div class="restaurant-category mb-1">
-                  <i class="fas fa-utensils pr-2"></i> {{restaurant.category}}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">    {{!-- {{#each}} 放在此之下，避免強制每張卡片在新的一行上，導致每個 row 只含一張卡片 --}}
+          {{#each restaurants as |restaurant|}} <!-- 已有 ID，故不用 restaurantsIndex -->          
+          <div class="col">
+            <a href="/restaurants/{{restaurant.id}}" class="text-secondary">
+              <!-- 期待使用者點擊每一張卡片，都能導向 /restaurant/:id 的路由，故用 /restaurant/:id 當成路徑，並套用 each 語法 id 的格式，即 {{restaurant.id}} -->
+              <div class="card mb-3">
+                <img class="card-img-top" src="{{restaurant.image}}" alt="{{restaurant.name}}">
+                <div class="card-body p-3">
+                  <h6 class="card-title mb-1">{{restaurant.name}}</h6>
+                  <div class="restaurant-category mb-1">
+                    <i class="fas fa-utensils pr-2"></i> {{restaurant.category}}
+                  </div>
+                  <span class="badge rounded-pill bg-danger font-weight-normal">
+                    {{restaurant.rating}}
+                    <i class="fas fa-star fa-xs"></i>
+                  </span>  
+                  {{!-- 以下按鈕區 --}}                  
+                  <div>
+                    <div class="card-footer d-flex justify-content-end p-2">
+                      <div class="button-group d-flex justify-content-between flex-wrap" style="width: 100%;">
+                        <a href="/restaurants/{{restaurant.id}}/edit" class="btn btn-primary flex-fill me-2">
+                          Edit
+                        </a>
+                        <a href="/restaurants/{{restaurant.id}}" class="btn btn-primary flex-fill me-2">
+                          Detail
+                        </a> 
+                        <form {{!-- 用 delete 按鈕發出一個 POST 請求，而 <a> 只能發 GET 請求，所以這裡需要用 <form>： --}}
+                          id="delete-restaurant"
+                          action="/restaurants/{{this.id}}?_method=DELETE"
+                          method="post"
+                          style="display: inline;"> {{!-- 讓按鈕顯示在同一列 --}} 
+                          <button type="submit" class="btn btn-secondary">Delete</button>
+                        </form> 
+                      </div>
+                    </div>                    
+                  </div>                 
                 </div>
-
-                <span class="badge rounded-pill bg-danger font-weight-normal">
-                  {{restaurant.rating}}
-                  <i class="fas fa-star fa-xs"></i>
-                </span>
-
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
           {{/each}} {{!-- 使用 exch，故刪掉 2-8 的資料 --}}
         </div>
       </div>

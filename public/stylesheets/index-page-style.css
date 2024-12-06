@@ -1,3 +1,20 @@
+main {
+  outline: 3px solid tomato; 
+  max-width: 1080px; /* 限制最大寬度 */
+  margin: 0 auto; /* 容器水平置中 */
+  padding: 40px 20px; 
+  background-color: #6c757d;
+  color: white; 
+  height: 70px; /* 高度 (可根據需求調整) */
+  border-radius: 8px;
+} 
+
+.row-container {
+  /* outline: 3px solid rgb(225, 255, 0); */
+  max-width: 1080px; /* 限制最大寬度 */
+  margin: 0 auto; /* 容器水平置中 */
+} 
+
 header {
   overflow: hidden;
 }
@@ -54,6 +71,29 @@ header {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
+.card-footer {
+  max-width: 450px; 
+  display: flex;
+  flex-wrap: wrap; /* 啟用換行 */
+  gap: 1px; /* 增加按鈕之間的間距 */
+  justify-content: space-between; /* 保持按鈕間的均勻間距 */
+  /* outline: 3px solid green; */
+}
+
+.button-group {
+  width: 100%; /* 確保子項目的寬度受限於父元素 */
+  gap: 1px; /* 控制按鈕之間的間距 */
+  /* outline: 3px solid red; */
+}
+
+.btn {
+  flex-grow: 1; /* 讓按鈕均分空間 */
+  font-size: 12px; 
+  min-width: 5px; /* 設定按鈕最小寬度，防止按鈕過窄 */
+  text-align: center; /* 讓按鈕內容置中 */
+  /* outline: 3px solid blue; */
+}
+
 .card img {
   height: 180px;
 }
@@ -98,4 +138,19 @@ header {
     height: auto;
   }
 
+}
+
+@media screen and (max-width: 768px) {
+  .card-footer {
+    flex-wrap: wrap; /* 小螢幕自動換行 */
+  }
+
+  .button-group {
+    gap: 5px; /* 縮小間距，避免按鈕佔用過多空間 */
+  }
+
+  .btn {
+    flex-grow: 1; /* 小螢幕按鈕佔據均等空間 */
+    min-width: 80px; /* 設定更小的最小寬度 */
+  }
 }

@@ -1,7 +1,25 @@
 header {
   overflow: hidden;
-}
+} 
+ 
+.container .search-bar {
+  margin-top: 150px;
+  /* outline: 3px solid blue;  */
+  max-width: 1080px; 
+} 
+ 
+.input-group {
+  /* outline: 3px solid blue;  */
+  max-width: 1080px; 
+} 
 
+/* 搜索圖標樣式 */
+.test {   
+  color: #aaa; /* 圖標顏色 */
+  font-size: 1rem; /* 圖標大小 */
+  padding: 5px 0; /* 為圖標添加上下間距 */
+}
+ 
 .navbar .navbar-brand {
   color: #4592af;
 }

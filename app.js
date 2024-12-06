@@ -30,27 +30,35 @@ app.use(express.static('public'))
 // 設定路由
 // http://localhost:3000/
 app.get('/', (req, res) => {
-	res.render('index')
-  // res.redirect('/restaurants') // 將根路徑 / redirect 到 /restaurants ，原因是專案規格中，網站的首頁會直接導向餐廳清單。
+	// res.render('index')
+  res.redirect('/restaurants') // 將根路徑 / redirect 到 /restaurants ，原因是專案規格中，網站的首頁會直接導向餐廳清單。
 })
 
 // 取得 GET restaurants 清單頁：http://localhost:3000/restaurants
-app.get('/restaurants', (req, res) => {
-  return restaurant.findAll({ // 刪除原本的 res.send('get all restaurants')，改成利用 restaurant.findAll 取得全部的 restaurant 項目
-    raw: true
-  })
-		.then((restaurants) => res.render('restaurants', { restaurants })) // 刪除原本的「res.send({ restaurants }))」，改成「res.render('restaurants', { restaurants }))」，以「」
-		.catch((err) => res.status(422).json(err))
-
-  const keyword = req.query.search?.trim() || '' // searching：因為在 index.hbs 中，input 的 name="search"，去除多餘空白，確保 keyword 至少是一個空字串
-  // console.log('keyword', keyword)
-  const matchedRestaurants = keyword ? restaurants.filter(rt =>
-        (rt.name && rt.name.toLowerCase().includes(keyword.toLowerCase())) ||
-        (rt.category && rt.category.toLowerCase().includes(keyword.toLowerCase()))
-      )
-    : restaurants
-  res.render('index', { restaurants: matchedRestaurants, keyword} ) 
-})
+app.get('/restaurants', async (req, res) => {
+  try {
+    // 從 database 取得餐廳資料
+    const restaurants = await restaurant.findAll({ // 刪除原本的 res.send('get all restaurants')，改成利用 restaurant.findAll 取得全部的 restaurant 項目     
+      attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
+      raw: true
+    })
+    // 若關鍵字存在則進行篩選，若無關鍵字則回傳所有資料
+    const keyword = req.query.search?.trim().toLowerCase()
+    const matchedRestaurants = keyword? restaurants.filter((rst) => 
+      Object.values(rst).some((prop) => {
+        if (typeof prop === 'string') {
+          return prop.toLowerCase().includes(keyword)
+        }
+        return false
+      })
+    ) : restaurants
+    // 渲染畫面
+    res.render('index', {restaurants: matchedRestaurants, keyword})
+    // 錯誤處理
+    } catch (err) {
+        console.log(err)  
+    }
+})  
 
 // create-取得 GET restaurants 新增頁：http://localhost:3000/restaurants/new
 app.get('/restaurants/new', (req, res) => {
