@@ -7,6 +7,11 @@ header {
   /* outline: 3px solid blue;  */
   max-width: 1080px; 
 } 
+
+.container-show-page {
+  margin-top: 400px;
+  /* outline: 3px solid rgb(191, 0, 255); */
+}
  
 .input-group {
   /* outline: 3px solid blue;  */

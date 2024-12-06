@@ -99,13 +99,14 @@ app.post('/restaurants', (req, res) => {
 
 // Read-取得 GET restaurants 項目頁-看 restaurant 的 detail：http://localhost:3000/restaurants/{id}
 app.get('/restaurants/:id', (req, res) => {
-  const id = req.params.id // // 刪除原本的「res.send(`get restaurant: ${req.params.id}`)」，改成「const id = req.params.id」，以「」 
-
+  const id = req.params.id // 刪除原本的「res.send(`get restaurant: ${req.params.id}`)」，改成「const id = req.params.id」，以「使用 params 做動態路由：取得使用者在網址列中輸入的「請求物件」，取得使用者於網址上 :id 位置輸入的內容，再把這個取得的內容動態回應到使用者所看的網站畫面中，最終讓使用者可以在瀏覽器畫面上看到自己於網址列所輸入的內容」 
+  // const restaurant = restaurants.find((rt) => rt.id.toString() === id) // reading 新增，rt 是 restaurant 的縮寫 
 	return restaurant.findByPk(id, {
-		attributes: ['id', 'name'], // 加入 Attribute 取得特定欄位
+		attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'], // 加入 Attribute 取得特定欄位
 		raw: true
 	})
-		.then((restaurant) => res.render('restaurant', { restaurant })) // 取得結果後，透過 View Template，渲染 restaurant 項目頁
+		.then((restaurant) => res.render('detail', { restaurant })) // reading：將 res.send(`read restaurant: ${id}`) 更新為 res.render('detail')，但無論怎麼點，都是直接跳出樣板的內容
+  // reading：再更新為 res.render('detail', { restaurant })，所以點擊後，可跳出對應樣板的內容  
 		.catch((err) => console.log(err))
 })
 
