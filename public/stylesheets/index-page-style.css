@@ -1,3 +1,4 @@
+/* Read */
 main {
   /* outline: 3px solid tomato;  */
   max-width: 1080px; /* 限制最大寬度 */
@@ -9,11 +10,20 @@ main {
   border-radius: 8px;
 } 
 
+/* Read */
+.row-container {
+  /* outline: 3px solid rgb(225, 255, 0); */
+  max-width: 1080px; /* 限制最大寬度 */
+  margin: 0 auto; /* 容器水平置中 */
+} 
+
+/* Create */
 .new-container {
   /* outline: 3px solid blue; */
   margin-top: 400px;   
 }
 
+/* Create */
 .new {
   /* outline: 3px solid purple;  */
   color: rgb(0, 0, 0); 
@@ -21,7 +31,7 @@ main {
   margin: 0 auto; /* 容器水平置中 */
 }
 
-/* 為表單中的所有輸入框設定寬度 */
+/* Create：為表單中的所有輸入框設定寬度 */
 form input,
 form textarea {
   width: 400px; /* 固定寬度，確保一致 */
@@ -32,17 +42,12 @@ form textarea {
   margin-bottom: 5px; /* 增加間距讓輸入框之間更整齊 */
 }
 
-/* 單獨設置 textarea 高度 */
+/* Create：單獨設置 textarea 高度 */
 form textarea {
   height: 120px; /* 設定高度 */
 }
 
-.row-container {
-  /* outline: 3px solid rgb(225, 255, 0); */
-  max-width: 1080px; /* 限制最大寬度 */
-  margin: 0 auto; /* 容器水平置中 */
-} 
-
+/* Update */
 .edit {
   /* outline: 3px solid rgb(128, 0, 0); */
   color: rgb(0, 0, 0); 
@@ -106,6 +111,7 @@ header {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Read */ 
 .card-footer {
   max-width: 450px; 
   display: flex;
@@ -115,12 +121,14 @@ header {
   /* outline: 3px solid green; */
 }
 
+/* Read */ 
 .button-group {
   width: 100%; /* 確保子項目的寬度受限於父元素 */
   gap: 1px; /* 控制按鈕之間的間距 */
   /* outline: 3px solid red; */
 }
 
+/* Read */ 
 .btn {
   flex-grow: 1; /* 讓按鈕均分空間 */
   font-size: 12px; 
@@ -175,6 +183,7 @@ header {
 
 }
 
+/* Read */ 
 @media screen and (max-width: 768px) {
   .card-footer {
     flex-wrap: wrap; /* 小螢幕自動換行 */
@@ -190,6 +199,7 @@ header {
   }
 }
 
+/* Create */
 @media (max-width: 768px) { /* RWD */
 
   form input,

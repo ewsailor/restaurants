@@ -1,24 +1,27 @@
 header {
   overflow: hidden;
 } 
- 
+
+/* Read */ 
 .container .search-bar {
   margin-top: 150px;
   /* outline: 3px solid blue;  */
   max-width: 1080px; 
 } 
 
+/* Read */ 
 .container-show-page {
   margin-top: 400px;
   /* outline: 3px solid rgb(191, 0, 255); */
 }
  
+/* Read */ 
 .input-group {
   /* outline: 3px solid blue;  */
   max-width: 1080px; 
 } 
 
-/* 搜索圖標樣式 */
+/* Read：搜索圖標樣式 */
 .test {   
   color: #aaa; /* 圖標顏色 */
   font-size: 1rem; /* 圖標大小 */

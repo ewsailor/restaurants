@@ -152,15 +152,15 @@ app.delete('/restaurants/:id', (req, res) => { // 刪除 restaurant
 		.then(() => res.redirect('/restaurants'))
 	// 刪除：res.send(`restaurant id: ${req.params.id} has been deleted`)
 })
- 
-
-app.get('/restaurant/:id', (req, res) => {
-  const id = req.params.id // 使用 params 做動態路由：取得使用者在網址列中輸入的「請求物件」，取得使用者於網址上 :id 位置輸入的內容，再把這個取得的內容動態回應到使用者所看的網站畫面中，最終讓使用者可以在瀏覽器畫面上看到自己於網址列所輸入的內容
-  const restaurant = restaurants.find((rt) => rt.id.toString() === id) // reading 新增，rt 是 restaurant 的縮寫 
-  res.render('detail', {restaurant} ) // reading：將 res.send(`read restaurant: ${id}`) 更新為 res.render('detail')，但無論怎麼點，都是直接跳出樣板的內容
-  // reading：再更新為 res.render('detail', { restaurant })，所以點擊後，可跳出對應樣板的內容  
-})
 
 app.listen(port, () => {
   console.log(`express server is running on http://localhost:${port}`)
 })
+ 
+// 忘了刪的程式碼，留下來提醒自己未來要記得刪除
+// app.get('/restaurant/:id', (req, res) => {
+//   const id = req.params.id // 使用 params 做動態路由：取得使用者在網址列中輸入的「請求物件」，取得使用者於網址上 :id 位置輸入的內容，再把這個取得的內容動態回應到使用者所看的網站畫面中，最終讓使用者可以在瀏覽器畫面上看到自己於網址列所輸入的內容
+//   const restaurant = restaurants.find((rt) => rt.id.toString() === id) // reading 新增，rt 是 restaurant 的縮寫 
+//   res.render('detail', {restaurant} ) // reading：將 res.send(`read restaurant: ${id}`) 更新為 res.render('detail')，但無論怎麼點，都是直接跳出樣板的內容
+//   // reading：再更新為 res.render('detail', { restaurant })，所以點擊後，可跳出對應樣板的內容  
+// })
