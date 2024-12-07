@@ -1,12 +1,18 @@
 {
   "name": "restaurants",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "C4 M1",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
     "seed": "sequelize db:seed:all",
+    "db:create": "node create-db.js",
+    "db:migrate": "npx sequelize db:migrate",
+    "db:seed": "npx sequelize db:seed:all",
+    "setup-db": "node create-db.js && npx sequelize db:migrate && npx sequelize db:seed:all",
+    "db:migrate:undo": "npx sequelize db:migrate:undo",
+    "db:seed:undo": "npx sequelize db:seed:undo", 
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
